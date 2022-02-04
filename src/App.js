@@ -20,7 +20,6 @@ function App() {
   const [countries, setCountries] = useState([]);
   const [fish, setFish] = useState([]);
 
-  const [isLoading, setLoading] = useState(false);
   const [isAnimalsLoading, setAnimalsLoading] = useState(false);
   const [isBreedsLoading, setBreedsLoading] = useState(false);
   const [isCountriesLoading, setIsCountriesLoading] = useState(false);
@@ -39,7 +38,7 @@ function App() {
     setAnimalsLoading(true);
 
     const data = await getAnimals();
-    setLoading(false);
+    setAnimalsLoading(false);
     setAnimals(data);
   }
 
@@ -81,6 +80,7 @@ function App() {
       <button onClick={fetchData}>Fetch Animals</button> 
       {
         isAnimalsLoading
+     
           ? <h2>Animals Loading</h2>
           : <AnimalsList animals= {animals} />
       }
