@@ -11,6 +11,7 @@ import FishList from './fishList';
 import { getAnimals } from './getAnimals';
 import { getBreeds } from './getBreeds';
 import { getCountries } from './getCities';
+import { getFish } from './getFish';
 
 
 
@@ -22,12 +23,14 @@ function App() {
   const [animals, setAnimals] = useState([]);
   const [breeds, setBreeds] = useState([]);
   const [countries, setCountries] = useState([]);
+  const [fish, setFish] = useState([]);
 
   const [isLoading, setLoading] = useState(false);
 
   const [isAnimalsLoading, setAnimalsLoading] = useState(false);
   const [isBreedsLoading, setBreedsLoading] = useState(false);
   const [isCountriesLoading, setIsCountriesLoading] = useState(false);
+  const [isFishLoading, setIsFishLoading] = useState(false);
 
   async function fetchData(){
     setAnimalsLoading(true);
@@ -71,6 +74,18 @@ function App() {
  
   }
 
+
+  async function fetchAndStoreFish() {
+    console.log(fish);
+    setIsFishLoading(true);
+
+    const data = await getFish();
+
+    setLoading(false);
+    setFish(data);
+ 
+  }
+
   useEffect(() =>{
     fetchAndStoreAnimals();
   }, []);
@@ -85,6 +100,8 @@ function App() {
       <BreedsList breeds= {breeds} />
       <button onClick={fetchAndStoreCountries}>Fetch Countries</button> 
       <CountriesList countries= {countries} />
+      <button onClick={fetchAndStoreFish}>Fetch Fish</button> 
+      <FishList fishes= {fish} />
     </div>
   
   
