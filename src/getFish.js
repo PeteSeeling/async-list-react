@@ -1,9 +1,9 @@
 import { checkError, client } from './client';
 
-export async function getCountries(){
+export async function getFish(){
 
   const response = await client
-    .from ('countries')
+    .from ('fish')
     .select();
 
   return checkError(response);
