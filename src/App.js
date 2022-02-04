@@ -39,7 +39,7 @@ function App() {
     setAnimals(data);
  
   }
-  console.log(animals);
+
   useEffect(() =>{
     fetchAndStoreAnimals();
   }, []);
