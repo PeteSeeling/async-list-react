@@ -3,9 +3,11 @@ import './App.css';
 import { useEffect, useState } from 'react';
 
 import AnimalsList from './animals';
+import BreedsList from './breedslist';
 
 
 import { getAnimals } from './getAnimals';
+import { getBreeds } from './getBreeds';
 
 
 
@@ -15,10 +17,12 @@ import { getAnimals } from './getAnimals';
 function App() {
  
   const [animals, setAnimals] = useState([]);
+  const [breeds, setBreeds] = useState([]);
 
   const [isLoading, setLoading] = useState(false);
 
   const [isAnimalsLoading, setAnimalsLoading] = useState(false);
+  const [isBreedsLoading, setBreedsLoading] = useState(false);
 
   async function fetchData(){
     setAnimalsLoading(true);
@@ -40,6 +44,17 @@ function App() {
  
   }
 
+  async function fetchAndStoreBreeds() {
+    console.log(breeds);
+    setBreedsLoading(true);
+
+    const data = await getBreeds();
+
+    setLoading(false);
+    setBreeds(data);
+ 
+  }
+
   useEffect(() =>{
     fetchAndStoreAnimals();
   }, []);
@@ -48,8 +63,10 @@ function App() {
     
     <div className="App">
     
-      <button onClick={fetchData}>Fetch Data</button> 
+      <button onClick={fetchData}>Fetch Animals</button> 
       <AnimalsList animals= {animals} />
+      <button onClick={fetchAndStoreBreeds}>Fetch Breeds</button> 
+      <BreedsList breeds= {breeds} />
     </div>
   
   
