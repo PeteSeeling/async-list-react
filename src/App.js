@@ -27,13 +27,13 @@ function App() {
   const [isFishLoading, setIsFishLoading] = useState(false);
 
   async function fetchData(){
+   
     setAnimalsLoading(true);
 
     const data = await getAnimals();
     setAnimalsLoading(false);
     setAnimals(data);
   }
-
 
   async function fetchAndStoreAnimals() {
     setAnimalsLoading(true);
