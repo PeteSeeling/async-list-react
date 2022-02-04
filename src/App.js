@@ -7,15 +7,10 @@ import BreedsList from './breedslist';
 import CountriesList from './citiesList';
 import FishList from './fishList';
 
-
 import { getAnimals } from './getAnimals';
 import { getBreeds } from './getBreeds';
 import { getCountries } from './getCities';
 import { getFish } from './getFish';
-
-
-
-
 
 
 function App() {
@@ -26,7 +21,6 @@ function App() {
   const [fish, setFish] = useState([]);
 
   const [isLoading, setLoading] = useState(false);
-
   const [isAnimalsLoading, setAnimalsLoading] = useState(false);
   const [isBreedsLoading, setBreedsLoading] = useState(false);
   const [isCountriesLoading, setIsCountriesLoading] = useState(false);
@@ -42,52 +36,42 @@ function App() {
 
 
   async function fetchAndStoreAnimals() {
-   
     setAnimalsLoading(true);
 
     const data = await getAnimals();
-
     setLoading(false);
     setAnimals(data);
- 
   }
 
   async function fetchAndStoreBreeds() {
-    console.log(breeds);
     setBreedsLoading(true);
 
     const data = await getBreeds();
-
-    setLoading(false);
+    setBreedsLoading(false);
     setBreeds(data);
- 
   }
 
   async function fetchAndStoreCountries() {
-    console.log(countries);
     setIsCountriesLoading(true);
 
     const data = await getCountries();
-
-    setLoading(false);
+    setIsCountriesLoading(false);
     setCountries(data);
- 
   }
 
-
   async function fetchAndStoreFish() {
-    console.log(fish);
     setIsFishLoading(true);
 
     const data = await getFish();
-
-    setLoading(false);
+    setIsFishLoading(false);
     setFish(data);
- 
   }
 
   useEffect(() =>{
     fetchAndStoreAnimals();
+    fetchAndStoreFish();
+    fetchAndStoreCountries();
+    
   }, []);
 
   return (
@@ -95,16 +79,34 @@ function App() {
     <div className="App">
     
       <button onClick={fetchData}>Fetch Animals</button> 
-      <AnimalsList animals= {animals} />
+      {
+        isAnimalsLoading
+          ? <h2>Animals Loading</h2>
+          : <AnimalsList animals= {animals} />
+      }
+     
       <button onClick={fetchAndStoreBreeds}>Fetch Breeds</button> 
-      <BreedsList breeds= {breeds} />
+      {
+        isBreedsLoading
+          ? <h2>Breeds Loading</h2>
+          : <BreedsList breeds= {breeds} />
+      }
+     
       <button onClick={fetchAndStoreCountries}>Fetch Countries</button> 
-      <CountriesList countries= {countries} />
+      {
+        isCountriesLoading
+          ? <h2>Countries Loading</h2>
+          : <CountriesList countries= {countries} />
+      }
+     
       <button onClick={fetchAndStoreFish}>Fetch Fish</button> 
-      <FishList fishes= {fish} />
+      {
+        isFishLoading
+          ? <h2>Fish Loading</h2>
+          : <FishList fishes= {fish} />
+      }
+     
     </div>
-  
-  
   );
 }
 
