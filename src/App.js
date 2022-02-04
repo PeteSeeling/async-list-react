@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import AnimalsList from './animals';
 import BreedsList from './breedslist';
 import CountriesList from './citiesList';
+import FishList from './fishList';
 
 
 import { getAnimals } from './getAnimals';
