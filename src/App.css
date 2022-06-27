@@ -37,6 +37,7 @@
     transform: rotate(360deg);
   }
 }
+
 .animals-list, .breeds-list, .countries-list, .fish-list {
   margin:20px;
   border:solid 2px;

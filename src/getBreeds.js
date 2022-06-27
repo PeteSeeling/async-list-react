@@ -7,5 +7,4 @@ export async function getBreeds(){
     .select();
 
   return checkError(response);
-      
 }
